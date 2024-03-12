@@ -4,7 +4,7 @@ using Core.Persistence.Repositories;
 
 namespace Domain.Entities;
 
-public class CarImage : BaseEntity<Guid>
+public class CarImage : BaseEntity<int>
 {
     public int CarId { get; set; }
     public string ImagePath { get; set; }
@@ -17,7 +17,7 @@ public class CarImage : BaseEntity<Guid>
 
     }
 
-    public CarImage(Guid id, int carId, string imagePath) : this()
+    public CarImage(int id, int carId, string imagePath) : this()
     {
         Id = id;
         CarId = carId;
