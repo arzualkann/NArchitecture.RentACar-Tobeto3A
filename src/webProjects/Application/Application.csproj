@@ -16,11 +16,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Brands\Queries\Getlist\" />
-    <Folder Include="Features\Brands\Queries\GetById\" />
-    <Folder Include="Features\Cars\Queries\" />
-    <Folder Include="Features\Models\Queries\" />
-  </ItemGroup>
-
 </Project>
