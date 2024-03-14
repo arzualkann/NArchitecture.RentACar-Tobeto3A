@@ -1,9 +1,8 @@
 ﻿using Application.Features.Brands.Commands.Create;
 using Application.Features.Brands.Commands.Delete;
 using Application.Features.Brands.Commands.Update;
+using Application.Features.Brands.Queries.GetAll;
 using Application.Features.Brands.Queries.GetById;
-using Application.Features.Brands.Queries.Getlist;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -15,7 +14,7 @@ namespace WebAPI.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(await Mediator.Send(new GetAllBrandQuery()));
+            return Ok(await Mediator.Send(new GetAllBrandsQuery()));
         }
 
         [HttpGet("GetById")]

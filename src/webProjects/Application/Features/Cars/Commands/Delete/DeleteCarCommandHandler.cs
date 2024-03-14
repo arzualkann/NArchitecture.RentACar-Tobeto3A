@@ -25,6 +25,6 @@ namespace Application.Features.Cars.Commands.Delete
             DeletedCarResponse response = _mapper.Map<DeletedCarResponse>(deletedCar);
             return response;
         }
-        
+
     }
 }

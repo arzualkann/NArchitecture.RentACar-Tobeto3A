@@ -1,5 +1,4 @@
-﻿using Application.Features.Cars.Dtos;
-using Application.Features.Models.Dtos;
+﻿using Application.Features.Models.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;

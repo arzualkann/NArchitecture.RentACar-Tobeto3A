@@ -7,7 +7,7 @@ using Domain.Entities;
 
 namespace Application.Features.Brands.Profiles;
 
-public class MappingProfiles:Profile
+public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
@@ -17,8 +17,10 @@ public class MappingProfiles:Profile
         CreateMap<Brand, DeleteBrandCommand>().ReverseMap();
         CreateMap<Brand, DeletedBrandResponse>().ReverseMap();
 
-        CreateMap<Brand,UpdateBrandCommand>().ReverseMap();
+        CreateMap<Brand, UpdateBrandCommand>().ReverseMap();
         CreateMap<Brand, UpdatedBrandResponse>().ReverseMap();
 
+        CreateMap<Brand, GetAllBrandsResponse>().ReverseMap();
+        CreateMap<Brand, GetByIdBrandResponse>().ReverseMap();
     }
 }

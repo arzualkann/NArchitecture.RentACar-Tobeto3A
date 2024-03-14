@@ -19,8 +19,8 @@ public class CreateBrandCommandHandler : IRequestHandler<CreateBrandCommand, Cre
 
     public async Task<CreatedBrandResponse> Handle(CreateBrandCommand request, CancellationToken cancellationToken)
     {
-        Brand mappedBrand = _mapper.Map<Brand>(request);
-        Brand createdBrand = await _brandRepository.AddAsync(mappedBrand);
+        Brand mapperBrand = _mapper.Map<Brand>(request);
+        Brand createdBrand = await _brandRepository.AddAsync(mapperBrand);
         CreatedBrandResponse createdBrandResponse = _mapper.Map<CreatedBrandResponse>(createdBrand);
         return createdBrandResponse;
     }

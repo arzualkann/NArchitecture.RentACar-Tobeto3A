@@ -1,16 +1,31 @@
-﻿using Application.Features.Models.Dtos;
+﻿using Application.Features.Brands.Dtos;
+using Application.Features.Models.Dtos;
+using Application.Services.Repositories;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
-using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Models.Queries.GetList;
+namespace Application.Features.Models.Queries.GetAll;
+
 public class GetAllModelsQuery : IRequest<List<GetAllModelsResponse>>
 {
-    public int BrandId { get; set; } 
-    public string Name { get; set; } 
-    public int Id { get; set; }
+    public class GetAllModelsQueryHandler : IRequestHandler<GetAllModelsQuery, List<GetAllModelsResponse>>
+    {
+        private readonly IModelRepository _modelRepository;
+        private readonly IMapper _mapper;
 
-    public DateTime CreatedDate { get; set; }
-    public DateTime UpdatedDate { get; set; }
-    public DateTime DeletedDate { get; set; }
+        public GetAllModelsQueryHandler(IModelRepository modelRepository, IMapper mapper)
+        {
+            _modelRepository = modelRepository;
+            _mapper = mapper;
+        }
 
+        public async Task<List<GetAllModelsResponse>> Handle(GetAllModelsQuery request, CancellationToken cancellationToken)
+        {
+            List<Model> models = await _modelRepository.GetAllAsync(include: x => x.Include(x => x.Brand));
+            List<GetAllModelsResponse> responses = _mapper.Map<List<GetAllModelsResponse>>(models);
+            return responses;
+        }
+    }
 }

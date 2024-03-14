@@ -1,16 +1,30 @@
 ﻿using Application.Features.Cars.Dtos;
+using Application.Services.Repositories;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Cars.Queries.GetList;
+namespace Application.Features.Cars.Queries.GetAll;
 
-public class GetAllCarQuery:IRequest<List<GetAllCarsResponse>>
+public class GetAllCarsQuery : IRequest<List<GetAllCarsResponse>>
 {
-    public int Id { get; set; }
-    public string ModelName { get; set; }
-    public int ModelYear { get; set; }
-    public string Plate { get; set; }
-    public int State { get; set; }  // 1- Available 2- Rented 3-Under Maitenance
-    public double DailyPrice { get; set; }
-    public DateTime CreatedDate { get; set; }
-    public DateTime? UpdatedDate { get; set; }
+    public class GetAllCarsQueryHandler : IRequestHandler<GetAllCarsQuery, List<GetAllCarsResponse>>
+    {
+        private readonly ICarRepository _carRepository;
+        private readonly IMapper _mapper;
+
+        public GetAllCarsQueryHandler(ICarRepository carRepository, IMapper mapper)
+        {
+            _carRepository = carRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<List<GetAllCarsResponse>> Handle(GetAllCarsQuery request, CancellationToken cancellationToken)
+        {
+            List<Car> cars = await _carRepository.GetAllAsync(include: x => x.Include(x => x.Model));
+            List<GetAllCarsResponse> responses = _mapper.Map<List<GetAllCarsResponse>>(cars);
+            return responses;
+        }
+    }
 }

@@ -19,10 +19,10 @@ namespace Application.Features.Cars.Commands.Create
 
         public async Task<CreatedCarResponse> Handle(CreateCarCommand request, CancellationToken cancellationToken)
         {
-            Car mappedCar = _mapper.Map<Car>(request);
-            Car createdCar = await _carRepository.AddAsync(mappedCar);
-            CreatedCarResponse createdBrandResponse = _mapper.Map<CreatedCarResponse>(createdCar);
-            return createdBrandResponse;
+            Car car = _mapper.Map<Car>(request);
+            Car createdBrand = await _carRepository.AddAsync(car);
+            CreatedCarResponse response = _mapper.Map<CreatedCarResponse>(createdBrand);
+            return response;
         }
     }
     
