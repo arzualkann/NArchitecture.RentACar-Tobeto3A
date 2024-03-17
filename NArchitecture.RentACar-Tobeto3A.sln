@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "src\webProjects\W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistance", "src\corePackages\Core.Persistance\Core.Persistance.csproj", "{BE521D0D-B1B1-492C-8223-C11C56FCA9E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application", "src\corePackages\Core.Application\Core.Application\Core.Application.csproj", "{0977B195-BF6B-4EE3-98B0-0473DBB3DD91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application", "src\corePackages\Core.Application\Core.Application\Core.Application.csproj", "{0977B195-BF6B-4EE3-98B0-0473DBB3DD91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.CrossCutting", "src\corePackages\Core.CrossCutting\Core.CrossCutting\Core.CrossCutting.csproj", "{0C86211B-0A7A-43E2-86AF-6352905AC4FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.CrossCutting", "src\corePackages\Core.CrossCutting\Core.CrossCutting\Core.CrossCutting.csproj", "{0C86211B-0A7A-43E2-86AF-6352905AC4FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

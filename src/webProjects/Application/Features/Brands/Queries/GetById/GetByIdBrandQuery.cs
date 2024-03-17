@@ -24,7 +24,9 @@ public class GetByIdBrandQuery : IRequest<GetByIdBrandResponse>
         public async Task<GetByIdBrandResponse> Handle(GetByIdBrandQuery request, CancellationToken cancellationToken)
         {
             Brand? brand = await _brandRepository.GetAsync(b => b.Id == request.Id);
+            //b için b.ıd==request.ıd ye eşit olan datayı çek
             GetByIdBrandResponse response = _mapper.Map<GetByIdBrandResponse>(brand);
+            //brandi getbyıdbrandresponse'a çevir
             return response;
         }
     }
