@@ -1,8 +1,16 @@
-﻿using Application.Features.Models.Commands.Create;
+﻿using Application.Features.Brands.Models;
+using Application.Features.Brands.Queries.GetListDynamic;
+using Application.Features.Brands.Queries.GetListPagination;
+using Application.Features.Models.Commands.Create;
 using Application.Features.Models.Commands.Delete;
 using Application.Features.Models.Commands.Update;
+using Application.Features.Models.Models;
 using Application.Features.Models.Queries.GetAll;
 using Application.Features.Models.Queries.GetById;
+using Application.Features.Models.Queries.GetListDynamic;
+using Application.Features.Models.Queries.GetListPagination;
+using Core.Application.Requests;
+using Core.Persistence.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -39,6 +47,23 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateModelCommand command)
         {
             return Ok(await Mediator.Send(command));
+        }
+        [HttpGet("pagination")]
+        public async Task<IActionResult> GetListPagination([FromQuery] PageRequest pageRequest)
+        {
+            GetListPaginationModelQuery query = new() { PageRequest = pageRequest };
+            ModelListModel result = await Mediator.Send(query);
+            return Ok(result);
+        }
+        //FromQuery olmasının sebebi getrequest olması
+        //pagerequesti querye çevirip mediatora yolluyoruz.
+
+        [HttpPost("dynamic")]
+        public async Task<IActionResult> GetListDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
+        {
+            GetListModelDynamicQuery modelDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
+            ModelListModel result = await Mediator.Send(modelDynamicQuery);
+            return Ok(result);
         }
     }
 }
