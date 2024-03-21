@@ -6,6 +6,7 @@ using AutoMapper;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,7 @@ public class GetListModelDynamicQueryHandler : IRequestHandler<GetListModelDynam
 
     public async Task<ModelListModel> Handle(GetListModelDynamicQuery request, CancellationToken cancellationToken)
     {
-        IPaginate<Model> models = await _modelRepository.GetListByDynamicAsync(request.Dynamic, index: request.PageRequest.Page,
-            size: request.PageRequest.PageSize);
+        IPaginate<Model> models = await _modelRepository.GetListByDynamicAsync(request.Dynamic, include: m => m.Include(c => c.Brand), index: request.PageRequest.Page, size: request.PageRequest.PageSize);
         ModelListModel modelListModel = _mapper.Map<ModelListModel>(models);
         return modelListModel;
     }

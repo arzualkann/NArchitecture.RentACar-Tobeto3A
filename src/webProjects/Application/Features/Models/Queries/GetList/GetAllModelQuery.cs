@@ -2,30 +2,18 @@
 using Application.Features.Models.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Models.Queries.GetAll;
 
-public class GetAllModelsQuery : IRequest<List<GetAllModelsResponse>>
+public class GetAllModelsQuery : IRequest<List<GetAllModelsResponse>>,ICachableRequest
 {
-    public class GetAllModelsQueryHandler : IRequestHandler<GetAllModelsQuery, List<GetAllModelsResponse>>
-    {
-        private readonly IModelRepository _modelRepository;
-        private readonly IMapper _mapper;
+    public bool BypassCache { get; }
 
-        public GetAllModelsQueryHandler(IModelRepository modelRepository, IMapper mapper)
-        {
-            _modelRepository = modelRepository;
-            _mapper = mapper;
-        }
+    public string CacheKey => "model-list";
 
-        public async Task<List<GetAllModelsResponse>> Handle(GetAllModelsQuery request, CancellationToken cancellationToken)
-        {
-            List<Model> models = await _modelRepository.GetAllAsync(include: x => x.Include(x => x.Brand));
-            List<GetAllModelsResponse> responses = _mapper.Map<List<GetAllModelsResponse>>(models);
-            return responses;
-        }
-    }
+    public TimeSpan? SlidingExpiration { get; }
 }
